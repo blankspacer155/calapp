@@ -1,6 +1,6 @@
 
 import {  useEffect, useState} from "react"
-import { useHistory, useLocation } from "react-router"
+import { useHistory} from "react-router"
 import Result from "./Result"
 
 const Inputbar =() =>{ 
@@ -31,9 +31,12 @@ const Inputbar =() =>{
             alert("please select operator")
         }
         else{
-            setIsShowresult(true)
-             history.push('/result')
-            
+                setIsShowresult(true)
+                
+                if(!isShowresult)           // case result not show yet
+                {
+                     history.push('/result') 
+                }
         }   
         }
          
@@ -58,15 +61,22 @@ const Inputbar =() =>{
         const num1 = Number(ev.target.value)
         const [ ,num2] = num
         setNum([num1,num2])
-        //set show when change
-        setIsShowresult(false)
+     //result change
+       resultChange()
     }
     const num2Change = (ev:any) =>{
         const num2 = Number(ev.target.value)
         const [ num1, ] = num
         setNum([num1,num2])
+       //result change
+        resultChange()
+    }
+
+    //result on change
+    const resultChange= () =>{ 
          //set show when change
          setIsShowresult(false)
+        history.push('/')
     }
 
     //select operator value
@@ -79,8 +89,8 @@ const Inputbar =() =>{
             <input onChange={num2Change} placeholder="second number"></input>
             <select name='operator' onChange={(ev)=>{
                 setSelected(ev.target.value)
-                 //set show when change
-                setIsShowresult(false)
+                 //result change
+                resultChange()
                 }} defaultValue='none'>
                 <option value='none' selected disabled hidden>select option</option>
                 <option value='+'>add</option>
