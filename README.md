@@ -1,1 +1,1 @@
-Page: https://blankspacer155.github.io/calapp/
+Page: basic_calapp.surge.sh
